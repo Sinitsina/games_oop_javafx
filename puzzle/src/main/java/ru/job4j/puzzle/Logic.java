@@ -72,40 +72,32 @@ public class Logic {
         boolean res = false;
         int[][] table = this.convert();
         for (int i = 0; i < table.length; i++) {
-            if (checkVertical(table) || checkHorizontal(table)) {
-                res = true;
-                break;
+            if (table[i][i] == 1) {
+                if (checkVertical(table, i) || checkHorizontal(table, i)) {
+                    res = true;
+                    break;
+                }
             }
         }
         return res;
 
     }
-    public boolean checkVertical(int[][] table) {
-        //int[][] table = this.convert();
+    public boolean checkVertical(int[][] table, int column) {
         boolean result = true;
-        for (int i = 0; i < table.length-1; i++) {
-            for (int j = 0; j < table.length-1; j++) {
-                result = table[j][i] != 1 ? false : true;
-                if (result == false)
-                    break;
-            }
-            if (result == true) {
+        for (int i = 0; i < table.length; i++ ) {
+            if (table[i][column] != 1) {
+                result = false;
                 break;
             }
         }
         return result;
     }
 
-    public boolean checkHorizontal(int[][] table) {
-        //int[][] table = this.convert();
+    public boolean checkHorizontal(int[][] table, int row) {
         boolean result = true;
-        for (int i = 0; i < table.length-1; i++) {
-            for (int j = 0; j < table.length-1; j++) {
-                result = table[i][j] != 1 ? false : true;
-                if (result == false)
-                    break;
-            }
-            if (result == true) {
+        for (int i = 0; i < table.length; i++ ) {
+            if ( table[row][i] != 1) {
+                result = false;
                 break;
             }
         }
