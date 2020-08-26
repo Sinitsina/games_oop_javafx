@@ -1,9 +1,14 @@
 package ru.job4j.chess;
 
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
+import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.black.BishopBlack;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class LogicTest {
 
@@ -15,4 +20,13 @@ public class LogicTest {
         logic.add(new BishopBlack(Cell.C1));
         logic.move(Cell.C1, Cell.H6);
     }
+
+    @Test (expected = FigureNotFoundException.class)
+    public void whenFigureNotFound() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.move(Cell.A1, Cell.H6);
+    }
+
+
 }

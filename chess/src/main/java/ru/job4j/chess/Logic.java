@@ -30,21 +30,27 @@ public class Logic {
         this.figures[index] = this.figures[index].copy(dest);
     }
 
-    private boolean isFree(Cell[] steps) {
-        return true;
+    private boolean isFree(Cell[] steps) throws OccupiedCellException {
+        for (int index = 0; index != this.figures.length; index++) {
+            if (!(figures[index].position().equals(steps[index]))) {
+                return true;
+            }
+        }
+        throw new OccupiedCellException();
     }
-
-    public void clean() {
+    public void clean () {
         Arrays.fill(this.figures, null);
         this.index = 0;
     }
 
-    private int findBy(Cell cell) throws FigureNotFoundException {
-        for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
-                return index;
-            }
+    private int findBy (Cell cell) throws FigureNotFoundException {
+        for (int index = 0; index != figures.length; index++) {
+             Figure figure = figures[index];
+             if (figure != null && figure.position().equals(cell)) {
+                 return index;
+             }
         }
         throw new FigureNotFoundException();
+        }
     }
-}
+
