@@ -24,11 +24,11 @@ public class Logic {
             throws FigureNotFoundException, ImpossibleMoveException, OccupiedCellException {
         int index = this.findBy(source);
         Cell[] steps = this.figures[index].way(source, dest);
-        if (!isFree(steps)) {
-            throw new OccupiedCellException();
+        if (isFree(steps)) {
+            this.figures[index] = this.figures[index].copy(dest);
         }
-        this.figures[index] = this.figures[index].copy(dest);
     }
+
 
     private boolean isFree(Cell[] steps) throws OccupiedCellException {
         for (int index = 0; index != this.figures.length; index++) {
@@ -38,6 +38,7 @@ public class Logic {
         }
         throw new OccupiedCellException();
     }
+
     public void clean () {
         Arrays.fill(this.figures, null);
         this.index = 0;
